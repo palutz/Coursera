@@ -1,3 +1,5 @@
+import scala.annotation.tailrec
+
 // define  && and || without using the symbols
 def and(x:Boolean, y: =>Boolean) = if(x) y else false
 def or(x:Boolean,y: =>Boolean) = if(x) true else y
@@ -7,6 +9,24 @@ and(false, true)
 // and(true, loop) ... infinite loop
 or(false, false)
 or(true, false)
+
+// factorial
+def factorial(n: Int) : Int =
+  if(n == 0) 1 else (n * factorial(n-1))
+
+factorial(4)
+
+// factorial tailrecursive
+@tailrec    // annotation to check if it's an actual tail recursive function
+def factorialrec(n:Int): Int = {
+  def innerLoop(x: Int, acc: Int) : Int =
+    if(x == 0) acc
+    else innerLoop(x-1, x * acc)
+  innerLoop(n, 1)
+}
+factorialrec(4)
+
+
 
 // HOF - High Order Function
 def sumOfFactorials(f: Int => Int, a: Int, b: Int) : Int =
