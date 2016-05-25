@@ -1,3 +1,13 @@
+// define  && and || without using the symbols
+def and(x:Boolean, y: =>Boolean) = if(x) y else false
+def or(x:Boolean,y: =>Boolean) = if(x) true else y
+and(false, true)
+// def loop: Boolean = loop
+// and(false, loop)
+// and(true, loop) ... infinite loop
+or(false, false)
+or(true, false)
+
 // HOF - High Order Function
 def sumOfFactorials(f: Int => Int, a: Int, b: Int) : Int =
   if(a > b) a
@@ -29,7 +39,6 @@ def sum(f:Int => Int)(a: Int, b: Int) => Int = {
   def sumF(a: Int, b: Int) : Int =
     if (a > b) 0
     else f(a) + sumF(a + 1, b)
-  sumF   // return the function
 }
 */
 
@@ -39,9 +48,17 @@ def product(f: Int => Int)(a: Int, b: Int) : Int = {
   if(a > b) 1
   else f(a) * product(f)(a+1, b)
 }
-product(x => x * x)(3, 4)   // 144
+product(x => x * x)(3, 5)   // 144
 
 // write the factorial in terms of product
+def factWithProduct(a: Int) : Int =
+  product(x => x)(1, a)
 
+factWithProduct(6)
 
 // write a more general function that generalizes both sum and product
+def genericProduct(f: (Int, Int) => Int)(identity: Int)(g: Int => Int)(a: Int, b: Int) : Int =
+  if (a > b) identity
+  else f(g(a), genericProduct(f)(identity)(g)(a +1, b))
+
+genericProduct((x,y) => x *y)(1)(x => x * x)(3, 5)
