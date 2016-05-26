@@ -14,6 +14,11 @@ object Main {
     // val res = balance("())(".toList)
     //val res = balance(":-)".toList)
     //println(s"res=$res")
+    //println(countChange(4, List(1,2,3)))
+    //println(countChange(4, List(2,3,1)))
+    //println(countChange(0, List(1,2,3)))
+    //println(countChange(2, List(3,4,5)))
+    //println(countChange(20, List(3,4,5)))
   }
 
   /**
@@ -47,5 +52,14 @@ object Main {
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = ???
+  def countChange(money: Int, coins: List[Int]): Int = {
+    def count(m: Int, c: List[Int]) : Int = {
+      if (c.isEmpty) 0
+      else if (m - c.head == 0) 1
+      else if (m - c.head < 0) 0
+      else countChange(m - c.head, c) + countChange(m, c.tail)
+    }
+    count(money, coins.sorted)
   }
+
+}
