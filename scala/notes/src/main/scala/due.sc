@@ -1,18 +1,3 @@
-// factorial
-def factorial(n: Int) : Int =
-  if(n == 0) 1 else (n * factorial(n-1))
-
-factorial(4)
-
-// factorial recursive
-def factorialrec(n:Int): Int = {
-  def innerLoop(x: Int, acc: Int) : Int =
-    if(x == 0) acc
-    else innerLoop(x-1, x * acc)
-  innerLoop(n, 1)
-}
-factorialrec(4)
-
 
 // HOF - High Order Function
 def sumOfFactorials(f: Int => Int, a: Int, b: Int) : Int =

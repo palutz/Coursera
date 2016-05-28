@@ -30,8 +30,6 @@ def sqrt(num: Double) : Double = {
 sqrt(4)
 sqrt(2)
 
-
-
 // **************************
 //  GCD - greatest common divisor
 def gcd(a: Int, b: Int): Int =
@@ -39,3 +37,20 @@ def gcd(a: Int, b: Int): Int =
 
 gcd(0, 14)
 gcd(21, 14)
+
+
+// factorial
+def factorial(n: Int) : Int =
+  if(n == 0) 1 else (n * factorial(n-1))
+
+factorial(6)
+
+// tailrec factorial recursive
+def factorialtailrec(n:Int): Int = {
+  @annotation.tailrec
+  def innerLoop(x: Int, acc: Int) : Int =
+    if(x == 0) acc
+    else innerLoop(x-1, x * acc)
+  innerLoop(n, 1)
+}
+factorialtailrec(6)
