@@ -9,20 +9,22 @@ or(false, false)
 or(true, false)
 // **********************
 // Compute sqrt with Newton method
-val estimate = 1
-def sqrIter(guess: Double, x: Double): Double =
-  if(isGoodEnough(guess, x)) guess
-  else sqrIter(improve(guess, x), x)
 
-def isGoodEnough(guess: Double, x: Double): Boolean =
-  Math.abs(guess - x) / x < 0.001
+def sqrt(x: Double) : Double = {
+  val estimate = 1
 
-def improve(guess: Double, x: Double): Double =
-  (guess + x / guess) / 2
+  def sqrIter(guess: Double, x: Double): Double =
+    if (isGoodEnough(guess, x)) guess
+    else sqrIter(improve(guess, x), x)
 
+  def isGoodEnough(guess: Double, x: Double): Boolean =
+    Math.abs(guess - x) / x < 0.001
 
-def sqrt(x: Double) : Double =
+  def improve(guess: Double, x: Double): Double =
+    (guess + x / guess) / 2
+
   sqrIter(1.0, x)
+}
 
 
 sqrt(4.0)
