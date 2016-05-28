@@ -15,9 +15,18 @@ def sqrIter(guess: Double, x: Double): Double =
   else sqrIter(improve(guess, x), x)
 
 def isGoodEnough(guess: Double, x: Double): Boolean =
-  Math.abs(guess - x) < 0.001
+  Math.abs(guess - x) / x < 0.001
 
 def improve(guess: Double, x: Double): Double =
+  (guess + x / guess) / 2
+
+
+def sqrt(x: Double) : Double =
+  sqrIter(1.0, x)
+
+
+sqrt(4.0)
+sqrt(2.0)
 
 
 
