@@ -1,3 +1,13 @@
+def sum(f: Int => Int): (Int, Int) => Int = {
+  def sumF(a: Int, b: Int): Int =
+    if(a > b) 0
+    else f(a) + sumF(a+1, b)
+  sumF
+}
+
+val idSum = sum(x => x)
+idSum(3, 10)
+
 
 // HOF - High Order Function
 def sumOfFactorials(f: Int => Int, a: Int, b: Int) : Int =
