@@ -1,3 +1,5 @@
+// currying...
+// separated the parameters and now returns a function..
 def sum(f: Int => Int): (Int, Int) => Int = {
   def sumF(a: Int, b: Int): Int =
     if(a > b) 0
@@ -7,6 +9,14 @@ def sum(f: Int => Int): (Int, Int) => Int = {
 
 val idSum = sum(x => x)
 idSum(3, 10)
+
+// same as before... just shorter ...
+def sum2(f: Int => Int)(a:Int, b: Int) : Int =
+  if(a>b) 0
+  else f(a) + sum(f)(a+1, b)
+
+val idSum2 = sum2((x: Int) => x + 1)
+idSum2(3, 10)
 
 
 // HOF - High Order Function
@@ -32,16 +42,6 @@ def sum(f:Int => Int, a: Int, b: Int) = {
 }
 
 sum(x => x * x, 2, 5)  // 54
-
-// currying...
-// separated the parameters and now returns a function..
-/*
-def sum(f:Int => Int)(a: Int, b: Int) => Int = {
-  def sumF(a: Int, b: Int) : Int =
-    if (a > b) 0
-    else f(a) + sumF(a + 1, b)
-}
-*/
 
 // product function that calculates the product of the values of a function for the points in
 // a given inteval
