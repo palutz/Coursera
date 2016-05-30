@@ -24,11 +24,6 @@ object second {
 
   aFunct(1,2,3)
 
-  def AFunctp(a: Int, b: Int) : Int =
-    (c: Int) => {
-      a + b +c
-    }
-
   // HOF - High Order Function
   def sumOfFactorials(f: Int => Int, a: Int, b: Int) : Int =
     if(a > b) a
@@ -73,5 +68,57 @@ object second {
     else f(g(a), genericProduct(f)(identity)(g)(a +1, b))
 
   genericProduct((x,y) => x *y)(1)(x => x * x)(3, 5)
+}
 
+// when f(x) = x is a fixed point
+object fixedPoints {
+  val tolerance = 0.000001
+
+  def averageDamp(f: Double => Double)(x: Double) = (x + f(x)) / 2
+
+  def isCloseEnough(x: Double, y: Double) =
+    Math.abs((x - y) / x) / x < tolerance
+
+  def fixedPoint(f: Double => Double)(firstGuess: Double) = {
+    def iterate(guess: Double): Double = {
+      val next = f(guess)
+      if(isCloseEnough(guess, next)) next
+      else iterate(next)
+    }
+    iterate(firstGuess)
+  }
+
+  fixedPoint(x => 1 + x/2)(1)
+
+  def sqrt(x: Double) =
+    fixedPoint(averageDamp(y => x / y))(1)
+
+  sqrt(2)
+}
+
+class Rational(x: Int, y: Int) {
+  def numer = x
+  def denom = y
+
+  def add(that: Rational) = {
+    new Rational (
+      this.numer * that.denom + that.numer * this.denom,
+      this.denom * that.denom
+    )
+  }
+
+  def neg: Rational = new Rational(-this.numer, denom)
+
+  def sub(that : Rational) = add(that.neg)
+
+  override def toString = s"${this.numer} / ${this.denom}"
+}
+
+object rationals {
+  val x = new Rational(1, 3)
+  val y = new Rational(5, 7)
+  val z = new Rational(3, 2)
+
+  x.toString
+  x.sub(y).sub(z)
 }
