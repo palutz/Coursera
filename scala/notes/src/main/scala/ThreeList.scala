@@ -11,8 +11,8 @@ object ThreeList {
 
   val ml = new Cons(0, new Cons(1, new Cons(2, new Cons(3, new Cons(4, new Cons(5, new Nul[Int]()))))))
   val a = nth(3, ml)
-  val a = nth(6, ml)  // IndexOutofBound
-  val a = nth(1, ml)  // IndexOutofBound
+  val b = nth(6, ml)  // IndexOutofBound
+  val c = nth(1, ml)  // IndexOutofBound
 }
 
 trait MyList[T] {
