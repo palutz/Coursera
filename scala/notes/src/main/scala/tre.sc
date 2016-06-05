@@ -53,8 +53,3 @@ val tt = dd incl 9
 tt incl 11 incl 5
 
 
-def nth[T](i: Int, xs: List[T]): T = {
-  if(xs.isEmpty) throw new IndexOutOfBoundsException
-  else if(i == 0) xs.head
-  else nth(i + 1, xs.tail)
-}
