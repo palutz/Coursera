@@ -27,26 +27,6 @@ object four {
   }
 }
 
-object expression {
-  trait Expr
-  case class Number(n: Int) extends Expr
-  case class Sum(e1: Expr, e2: Expr) extends Expr
-  def eval(e: Expr): Int = {
-    e match {
-      case Number(n) => n
-      case Sum(e1, e2) => eval(e1) + eval(e2)
-    }
-  }
-  // receive an expression and return the string representation of the expression
-  def show(e: Expr): String = {
-    e match {
-      case Number(n) => n.toString
-      case Sum(e1, e2) => show(e1) + " + " + show(e2)
-    }
-  }
-
-  show(Sum(Number(1), Number(20)))
-}
 
 object List {
   def insert(x: Int, xs: List[Int]) : List[Int] =
