@@ -27,7 +27,7 @@ object four {
   }
 }
 
-
+/*
 object List {
   def insert(x: Int, xs: List[Int]) : List[Int] =
     xs match {
@@ -35,3 +35,4 @@ object List {
       case y :: ys => if(x <= y) x::xs else y::insert(x, ys)
     }
 }
+*/
