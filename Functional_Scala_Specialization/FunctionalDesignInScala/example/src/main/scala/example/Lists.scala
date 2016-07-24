@@ -50,7 +50,7 @@ object Lists {
           case Nil => largest
           case x :: xs1 => if(x > largest) loop(xs1, x) else loop(xs1, largest)
         }
-      if(xs == Nil || xs.isEmpty) throw new IndexOutOfBoundsException
+      if(xs == Nil) throw new IndexOutOfBoundsException
       else loop(xs, 0)
     }
   }

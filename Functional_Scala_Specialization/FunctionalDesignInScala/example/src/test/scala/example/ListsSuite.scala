@@ -132,6 +132,10 @@ import org.scalatest.junit.JUnitRunner
     assert(sum(List(10)) === 10)
   }
 
+  test("sum of list with repeated numbers") {
+    assert(sum(List(1,3,6,3,3)) === 16)
+  }
+
   test("max of a few numbers") {
     assert(max(List(3, 7, 2)) === 7)
   }
@@ -154,6 +158,10 @@ import org.scalatest.junit.JUnitRunner
 
   test("max of a list of the same number") {
     assert(max(List(6, 6, 6)) === 6)
+  }
+
+  test("max of a list with negative numbers") {
+    assert(max(List(0, -6, 2, -10, 3)) === 3)
   }
 
 }
