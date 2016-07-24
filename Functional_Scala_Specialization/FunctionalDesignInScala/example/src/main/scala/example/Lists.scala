@@ -47,10 +47,12 @@ object Lists {
     def max(xs: List[Int]): Int = {
       def loop(xxs: List[Int], largest: Int): Int =
         xxs match {
+          // case Nil => throw new NoSuchElementException
           case Nil => largest
+          // case x :: Nil => if(x > largest) x else largest
           case x :: xs1 => if(x > largest) loop(xs1, x) else loop(xs1, largest)
         }
-      if(xs == Nil) throw new IndexOutOfBoundsException
+      if(xs.isEmpty) throw new NoSuchElementException
       else loop(xs, 0)
     }
   }

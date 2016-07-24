@@ -141,13 +141,13 @@ import org.scalatest.junit.JUnitRunner
   }
 
   test("max of Nil List rises exception") {
-    intercept[IndexOutOfBoundsException] {
+    intercept[NoSuchElementException] {
       assert(max(Nil) === 0)
     }
   }
 
   test("max of empty List rises exception") {
-    intercept[IndexOutOfBoundsException] {
+    intercept[NoSuchElementException] {
       assert(max(List()) === 0)
     }
   }
