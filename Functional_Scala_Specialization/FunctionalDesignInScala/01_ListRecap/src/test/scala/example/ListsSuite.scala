@@ -100,7 +100,6 @@ import org.scalatest.junit.JUnitRunner
    */
   import Lists._
 
-
   /**
    * We only provide two very basic tests for you. Write more tests to make
    * sure your `sum` and `max` methods work as expected.

@@ -54,6 +54,15 @@ fabric.properties
 # modules.xml
 
 
+### Eclipse for scala ###
+#
+.cache-main
+.cache-tests
+.classpath
+.project
+.settings/
+
+
 ### Scala ###
 *.class
 *.log
