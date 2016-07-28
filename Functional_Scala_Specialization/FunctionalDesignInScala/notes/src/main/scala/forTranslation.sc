@@ -40,11 +40,14 @@ object forTranslation {
 	// exercise
 	for (b <- books, a <- b.authors if a startWith "Scala") yield b.title
 	// translatation in HO functions
-	books.flatMap(b => b.authors.withFilter(a => a.startWith "Scala").map(a => b.title))
-	
+	books.flatMap(b => b.authors.withFilter(a => a.startWith "Scala").map(y => y.title))
 
+// another example of for comprehension translation ausing High Order functions
+	//
 	// starting with ...
+	//
 	opt flatMap f flatMap g
+	
 	// 1) I can rewrite lie this...
 	opt match { case Some(x) => f(x) case None => None }
 		 match { case Some(y) => g(y) case None => None }
