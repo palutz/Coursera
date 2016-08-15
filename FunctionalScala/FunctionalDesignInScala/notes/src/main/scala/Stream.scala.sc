@@ -25,4 +25,18 @@ def sqrtStream(x: Double): Stream[Double] = {
   guesses
 }
 
-sqrtStream(160).take(20).toList
+// 2 - Adding the "determination criteria" here....
+def isGoodEnough(guess: Double, x: Double): Boolean = {
+  math.abs((guess * guess - x) / x) < 0.001
+}
+
+// 1) sqrtStream(160).take(20).toList
+
+// 2)
+sqrtStream(16).filter(isGoodEnough(_, 16)).take(10).toList
+
+
+def from(n: Int): Stream[Int] = n #:: from(n+1)
+// map faster than filter cause don't produce not necessary compute
+from(1).map(_ * 2).take(10).toList // take then element and then multiply by x (2)
+from(1).filter(_ % 2 == 0).take(10).toList // produce all the element and take all the element that respect the filter

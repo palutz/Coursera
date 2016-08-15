@@ -28,11 +28,19 @@ object primes {
 }
 
 object Sqrt {
+  // 1 - doing like this we got a perfectly good stream of approximation to the result
+  // decoupling, actually the idea of converging sequence from the "determination criteria" (that we can add after)
   def sqrtStream(x: Double): Stream[Double] = {
     def improve(guess: Double) = (guess + x / guess) / 2
     lazy val guesses: Stream[Double] = 1 #:: (guesses map improve)
     guesses
   }
+  // 2 - Adding the "determination criteria" here....
+  def isGoodEnough(guess: Double, x: Double) =
+    math.abs((guess * guess - x) / x) < 0.0001
 
-  sqrtStream(160).take(20).toList
+  // 1) sqrtStream(160).take(20).toList
+
+  // 2)
+  sqrtStream(16) filter (isGoodEnough(_, 4))
 }
