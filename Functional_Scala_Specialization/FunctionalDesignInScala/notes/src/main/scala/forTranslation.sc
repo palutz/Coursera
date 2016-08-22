@@ -14,11 +14,11 @@ object forTranslation {
 	for(x <- e1.withFilter(x => f); s) yield e2
 
 	// 3 - 2 generator, translate to flaptMap
-	for{
-		x <- e1
-		y <- e2;
-		s
-		) yield e3
+	for {
+    x <- e1
+    y <- e2;
+    s
+  } yield e3
 	// or I can write it on one line only
 	for(x <- e1; y <- e2; s) yield e3
 	//
@@ -37,10 +37,6 @@ object forTranslation {
 		(1 until i).withFilter(j => isPrime(i+j))  // condition, filters
 		.map(j => (i, j)))  // map for the yield
 
-	// exercise
-	for (b <- books, a <- b.authors if a startWith "Scala") yield b.title
-	// translatation in HO functions
-	books.flatMap(b => b.authors.withFilter(a => a.startWith "Scala").map(y => y.title))
 
 // another example of for comprehension translation ausing High Order functions
 	//
@@ -65,17 +61,36 @@ object forTranslation {
 			}
 	}
 	// 3) simplify in...
-	opt match  {
-		case Some(x) =>
-			f(x) match {
-				case Some(y) => g(y)
+	opt match {
+		case Some (x) =>
+			f (x) match {
+				case Some (y) => g (y)
 				case None => None
 			}
 		case None => None
+	}
 	// 4) and finally to ...
 	opt match {
-		case Some(x) => f(x) flatMap g
+		case Some (x) => f (x) flatMap g
 		case None => None
 	}
-	
+
+
+  // for comprehension with Future
+	trait AccountService[Credential, Session, Account] {
+
+		def login (credential: Credential): Future[Session]
+		def info (session: Session): Future[Account]
+
+		def account (credential: Credential): Future[Account] = {
+			for {
+				session <- login (credential)
+				account <- info (session)
+			} yield account
+		}
+
+		def batchInfo (credentials: Seq[Credential]): Future[Seq[Account]] = ???
+	}
+
 }
+
