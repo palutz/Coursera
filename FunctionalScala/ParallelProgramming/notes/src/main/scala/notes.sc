@@ -37,7 +37,7 @@ val pNorm = power(sumSegment(Array(1,2,3), 2.0, 0, 3), 1/2.0)
 
 def pNormTwoPart(a: Array[Int], p: Double): Int = {
   val hl = a.length / 2
-  val (v1, v2) = parallel(sumSegment(a, p, 0, hl), sumSegment(a, p, hl, a.length))
+  val (v1, v2)= parallel(sumSegment(a, p, 0, hl), sumSegment(a, p, hl, a.length))
 
   power(v1 + v2, 1/2.0)
 }
