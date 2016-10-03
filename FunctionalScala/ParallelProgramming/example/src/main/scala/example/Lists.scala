@@ -23,7 +23,16 @@ object Lists {
    * @param xs A list of natural numbers
    * @return The sum of all elements in `xs`
    */
-    def sum(xs: List[Int]): Int = ???
+    // def sum(xs: List[Int]): Int = xs.fold(0)(_ + _)
+    def sum(xs: List[Int]): Int = {
+      def innerSum(xl: List[Int], acc: Int) : Int = {
+        xl match {
+          case x1 :: xs1 => innerSum(xs1, acc + x1)
+          case _ => acc
+        }
+      }
+      innerSum(xs, 0)
+    }
   
   /**
    * This method returns the largest element in a list of integers. If the
@@ -38,5 +47,14 @@ object Lists {
    * @return The largest element in `xs`
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
-    def max(xs: List[Int]): Int = ???
+    def max(xs: List[Int]): Int = {
+      def innerMax(xl: List[Int], prevMax: Int): Int = {
+        xl match {
+          case x1::xs1 if(x1 > prevMax) => innerMax(xs1, x1)
+          case x1::xs1 if(x1 <= prevMax) => innerMax(xs1, prevMax)
+          case _ => prevMax
+        }
+      }
+      innerMax(xs, xs.head)
+    }
   }
