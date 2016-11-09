@@ -88,3 +88,6 @@ project/plugins/project/
 
 # vim
 .swp
+
+#sublime
+.sublime-project
