@@ -90,4 +90,4 @@ project/plugins/project/
 .swp
 
 #sublime
-.sublime-project
+*.sublime-project
