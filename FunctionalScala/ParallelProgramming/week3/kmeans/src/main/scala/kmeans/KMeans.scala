@@ -43,7 +43,10 @@ class KMeans {
   }
 
   def classify(points: GenSeq[Point], means: GenSeq[Point]): GenMap[Point, GenSeq[Point]] = {
-    ???
+    if (points.isEmpty)
+      means.map(m => (m, Nil)).toMap
+    else
+      points.groupBy(findClosest(_, means))
   }
 
   def findAverage(oldMean: Point, points: GenSeq[Point]): Point = if (points.length == 0) oldMean else {
@@ -59,16 +62,23 @@ class KMeans {
   }
 
   def update(classified: GenMap[Point, GenSeq[Point]], oldMeans: GenSeq[Point]): GenSeq[Point] = {
-    ???
+    oldMeans.map(oldMean => findAverage(oldMean, classified(oldMean)))
   }
 
   def converged(eta: Double)(oldMeans: GenSeq[Point], newMeans: GenSeq[Point]): Boolean = {
-    ???
+    val zipMeans = oldMeans zip newMeans
+
+    zipMeans.forall(pair => pair._1.squareDistance(pair._2) <= eta)
   }
 
   @tailrec
   final def kMeans(points: GenSeq[Point], means: GenSeq[Point], eta: Double): GenSeq[Point] = {
-    if (???) kMeans(???, ???, ???) else ??? // your implementation need to be tail recursive
+    val newMeans = update(classify(points, means), means)
+    if (!converged(eta)(means, newMeans))
+      kMeans(points, newMeans, eta)
+    else
+      newMeans
+    // your implementation need to be tail recursive
   }
 }
 
@@ -81,7 +91,9 @@ class Point(val x: Double, val y: Double, val z: Double) {
   def squareDistance(that: Point): Double = {
     square(that.x - x)  + square(that.y - y) + square(that.z - z)
   }
+
   private def round(v: Double): Double = (v * 100).toInt / 100.0
+
   override def toString = s"(${round(x)}, ${round(y)}, ${round(z)})"
 }
 
